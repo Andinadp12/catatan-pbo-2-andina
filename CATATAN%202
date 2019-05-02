@@ -1,0 +1,125 @@
+                                        ENCAPSULATION
+                                        
+Enkapsulation = pembungkusan/menyembunyikan
+konsep ini mengizinkan suatu data di dalam kelas bisa diakses atau tidak oleh objek2 di luar kelas,terdapat atribut PRIVAT dan PUBLIK.
+    @Privat = hanya dapat diakses dalam kelas itu sendiri
+    @publik = dapat diakses diluar kelas tersebut
+__namavariabel #pendeklarasian variabel privat
+namavariabel   #pendeklarasian variabel publik
+
+#INPUTNYA
+class robot(object):
+    def __init__(self):
+        self.__version = 22 #privat atribut
+    def getversion(self):
+        print(self.__version)#mengakses privat atribut
+        
+    def setversion(self,version):
+        self.__version = version#mensetting privat atribut
+obj = robot()
+obj.getversion()
+obj.setversion(23)
+obj.getversion()
+print(obj._robot__version)
+
+#OUTPUTNYA
+22
+23
+23
+
+#INPUTNYA
+class car:
+    __maxspeed = 0
+    __name = ""
+    
+    def __init__(self):
+        self.__maxspeed = 200
+        self.__name = "superCar"
+        
+    def setmaxspeed(self,maxspeed):
+        self.__maxspeed = maxspeed
+        
+    def drive(self):
+        print("driving.maxspeed"+str(self.__maxspeed))
+        
+redcar = car()
+redcar.drive()
+redcar.setmaxspeed(10)
+redcar.drive()
+
+#OUTPUTNYA
+driving.maxspeed200
+driving.maxspeed10
+
+
+
+
+                                        OPERATOR DAN METHOD OVERLOADING
+Overloading adalah pemakaian beberapa methods ataupun properties dengan nama yang sama, tetapi memiliki daftar parameter/argument yang berbeda. Perbedaan yang dimaksud adalah beda jumlah parameter, beda tipe data, atau beda keduanya (jumlah parameter dan tipe data). Methods ataupun properties yang hanya beda return value (nilai balik) tidak bisa dikatakan sebagai overloading.
+
+##INPUTNYA
+def add(datatype,*args):
+    if datatype =="int":
+        answer = 0
+    if datatype =="str":
+        answer = ""
+    for x in args:
+        answer = answer+ x
+    print(answer)
+#integer
+add("int",5,6)
+#string
+add("str","hi","geeks")
+
+##OUTPUTNYA
+11
+higeeks
+
+
+##INPUTNYA
+class human:
+    def sayhello(self,name=None):
+        if name is not None:
+            print("hello" +name)
+        else:
+            print("hello")
+#create initance
+obj = human()
+
+#call the method
+obj.sayhello()
+
+#call the method with a parameter
+obj.sayhello("guido")
+
+##OUTPUTNYA
+hello
+helloguido
+
+
+##INPUTNYA
+class fraction:
+    def __init__(self,top,bottom):
+        self.num = top
+        self.den = bottom
+   
+    def __str__(self):
+        return str(self.num)+"/"+str(self.den)
+    def __add__(self,otherfraction):
+        newnum = self.num*otherfraction.den+self.den*otherfraction.num
+        newden = self.den*otherfraction.den
+        return fraction(newnum,newden)
+    
+f = fraction(2,4)
+#show(f)
+print(f)
+    
+f1 = fraction(2,4)
+f2 = fraction(1,2)
+print(f1.__add__(f2))
+
+##OUTPUTNYA
+2/4
+8/8
+
+
